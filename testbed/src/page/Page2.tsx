@@ -12,8 +12,6 @@ export const Page2 = () => {
   return (
     <div>
       PAGE2 {value}
-      <br />
-      {location.pathname}
       <button
         onClick={() => history.push(`/page1/${+value + 1}`)}
       >
