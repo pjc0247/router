@@ -1,5 +1,7 @@
 # router
  
+![](preview.gif)
+ 
 ```tsx
 <Switch>
   <Route path="/post/:postId">
