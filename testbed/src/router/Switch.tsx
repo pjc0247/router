@@ -111,7 +111,7 @@ export const Switch = ({
     >
       {value.history.map((history, idx) => (
         <div
-          key={idx}
+          key={idx} // should be ok
           id={`${history.path}_page_${idx}`}
         >
           <Page
