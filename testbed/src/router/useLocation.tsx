@@ -1,14 +1,19 @@
 import React from 'react';
 
-import { useNavigationContext } from './NavigationContext';
+import { usePageContext } from './PageContext';
 
 type ILocation = {
   pathname: string;
+  params: Record<string, any>;
 };
 export const useLocation = (): ILocation => {
-  const navigationContext = useNavigationContext();
+  const {
+    path,
+    params,
+  } = usePageContext();
 
   return {
-    pathname: navigationContext.path,
+    pathname: path,
+    params,
   };
 };

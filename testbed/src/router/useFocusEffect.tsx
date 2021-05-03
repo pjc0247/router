@@ -11,5 +11,5 @@ export const useFocusEffect = (callback: () => void) => {
     if (!isActive) return;
     const disposer = callback();
     return disposer;
-  }, [isActive]);
+  }, [isActive, callback]);
 };
