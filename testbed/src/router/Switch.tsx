@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 
 import { createEvaluator } from './match';
-import { INavigationContext, NavigationContext } from './NavigationContext';
+import { INavigationContext, INavigationContextData, NavigationContext } from './NavigationContext';
 import { Page } from './Page';
 import { interpretReactChildren } from './react';
 
@@ -39,15 +39,14 @@ export const Switch = ({
       return;
     }
 
+    if (pushHistory) {
+      window.history.pushState({
+        index: value.history.length,
+        path,
+        params,
+      }, document.title, path);
+    }
     setValue(value => {
-      if (pushHistory) {
-        window.history.pushState({
-          index: value.history.length,
-          path,
-          params,
-        }, document.title, path);
-      }
-
       return {
         ...value,
         path,
@@ -61,16 +60,10 @@ export const Switch = ({
 
     value.history.pop();
     const prev = value.history[value.history.length - 1];
+
     setValue(value => {
       if (popHistory)
         window.history.back();
-      else {
-        window.history.replaceState({
-          index: value.history.length - 1,
-          path: prev.path,
-          params: prev.params,
-        }, document.title, prev.path);
-      }
       
       return {
         ...value,
@@ -80,11 +73,9 @@ export const Switch = ({
     });
   };
 
-  const [value, setValue] = useState<INavigationContext>({
+  const [value, setValue] = useState<INavigationContextData>({
     path: '',
     history: [],
-    push,
-    goBack,
   });
 
   useEffect(() => {
@@ -107,7 +98,11 @@ export const Switch = ({
 
   return (
     <NavigationContext.Provider
-      value={value}
+      value={{
+        ...value,
+        push,
+        goBack,
+      }}
     >
       {value.history.map((history, idx) => (
         <div

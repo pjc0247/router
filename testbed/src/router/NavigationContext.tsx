@@ -5,13 +5,15 @@ export type INavigationState = {
   params: Record<string, any>;
   route: React.ReactNode;
 };
-export type INavigationContext = {
+export interface INavigationContextData {
   path: string;
   history: INavigationState[];
-
+};
+export interface INavigationContext extends INavigationContextData {
   push: (path: string, params: Record<string, any>) => void;
   goBack: () => boolean;
-};
+}
+
 export const NavigationContext = React.createContext<INavigationContext>({} as any);
 export const useNavigationContext = (): INavigationContext => {
   return useContext<INavigationContext>(NavigationContext);
