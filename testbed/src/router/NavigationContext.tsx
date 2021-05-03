@@ -6,6 +6,7 @@ export type INavigationState = {
   route: React.ReactNode;
 };
 export interface INavigationContextData {
+  cursor: number;
   path: string;
   history: INavigationState[];
 };

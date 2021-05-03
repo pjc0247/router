@@ -50,6 +50,7 @@ export const Switch = ({
       return {
         ...value,
         path,
+        cursor: value.cursor + 1,
         history: [...value.history, createHistory(path, params, route)],
       };
     });
@@ -58,8 +59,7 @@ export const Switch = ({
     if (value.history.length <= 1)
       return false;
 
-    value.history.pop();
-    const prev = value.history[value.history.length - 1];
+    const prev = value.history[value.history.length - 2];
 
     setValue(value => {
       if (popHistory)
@@ -68,12 +68,14 @@ export const Switch = ({
       return {
         ...value,
         path: prev.path,
+        cursor: value.cursor - 1,
         history: [...value.history],
       };
     });
   };
 
   const [value, setValue] = useState<INavigationContextData>({
+    cursor: -1,
     path: '',
     history: [],
   });
@@ -84,7 +86,7 @@ export const Switch = ({
   useEffect(() => {
     const onPopState = (e: PopStateEvent) => {
       const { state } = e;
-      if (value.history.length > state.index) {
+      if (value.cursor > state.index) {
         goBack(false);
       } else {
         push(state.path, state.params, false);
@@ -110,7 +112,7 @@ export const Switch = ({
           id={`${history.path}_page_${idx}`}
         >
           <Page
-            isActive={idx === value.history.length - 1}
+            isActive={idx === value.cursor}
             state={history}
             {...(history.route as any).props}
           />

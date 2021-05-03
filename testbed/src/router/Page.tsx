@@ -28,7 +28,8 @@ export const Page = ({
       }}
     >
       <div
-        style={{ display: isActive ? 'block' : 'none' }}
+        //style={{ display: isActive ? 'block' : 'none' }}
+        className={`router-page router-page-${isActive ? 'active' : 'inactive'}`}
       >
         {children}
       </div>
