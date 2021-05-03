@@ -8,5 +8,16 @@
   opacity: 1;
 }
 .router-page-inactive {
-  opacity: 0;
+  overflow: hidden;
+  animation: fadeout 0.5s;
+  animation-fill-mode: forwards;
+}
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    height: 0px;
+  }
 }

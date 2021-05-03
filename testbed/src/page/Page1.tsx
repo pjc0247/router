@@ -8,6 +8,8 @@ export const Page1 = () => {
   const history = useHistory();
   const { value } = useParams();
 
+  console.log('v', value);
+
   return (
     <div>
       PAGE1 {value}

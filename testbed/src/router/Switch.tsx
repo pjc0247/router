@@ -41,7 +41,7 @@ export const Switch = ({
 
     if (pushHistory) {
       window.history.pushState({
-        index: value.history.length,
+        index: value.cursor,
         path,
         params,
       }, document.title, path);
@@ -51,7 +51,7 @@ export const Switch = ({
         ...value,
         path,
         cursor: value.cursor + 1,
-        history: [...value.history, createHistory(path, params, route)],
+        history: [...value.history.slice(0, value.cursor + 1), createHistory(path, params, route)],
       };
     });
   };
@@ -93,7 +93,6 @@ export const Switch = ({
           ...value,
           cursor: value.cursor + 1,
         }));
-        //push(state.path, state.params, false);
       }
     };
     window.addEventListener('popstate', onPopState);

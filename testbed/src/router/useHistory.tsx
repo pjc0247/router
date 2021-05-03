@@ -10,6 +10,7 @@ export const useHistory = (): IHistory => {
   const navigationContext = useNavigationContext();
 
   const push = (path: string, params: Record<string, any> = {}) => {
+    console.log('push, ' , path);
     navigationContext.push(path, params);
   };
   const goBack = (): boolean => {
