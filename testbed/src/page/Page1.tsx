@@ -11,7 +11,7 @@ export const Page1 = () => {
     <div>
       PAGE1 {value}
       <button
-        onClick={() => history.push(`/page2/${Math.random()}`)}
+        onClick={() => history.push(`/page2/${+value + 1}`)}
       >
         Go to Page2
       </button>

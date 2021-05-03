@@ -1,6 +1,6 @@
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 
-import { INavigationState, useNavigationContext } from './NavigationContext';
+import { INavigationState } from './NavigationContext';
 import { createEvaluator } from './match';
 import { PageContext } from './PageContext';
 
