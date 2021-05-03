@@ -89,7 +89,11 @@ export const Switch = ({
       if (value.cursor > state.index) {
         goBack(false);
       } else {
-        push(state.path, state.params, false);
+        setValue(value => ({
+          ...value,
+          cursor: value.cursor + 1,
+        }));
+        //push(state.path, state.params, false);
       }
     };
     window.addEventListener('popstate', onPopState);
