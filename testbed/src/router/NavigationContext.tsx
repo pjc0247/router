@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 export type INavigationState = {
   path: string;
   params: Record<string, any>;
+  route: React.ReactNode;
 };
 export type INavigationContext = {
   path: string;

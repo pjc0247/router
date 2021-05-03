@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 
+import { createEvaluator } from './match';
 import { INavigationContext, NavigationContext } from './NavigationContext';
+import { Page } from './Page';
 
 type SwitchProps = {
   children: React.ReactNode;
@@ -8,10 +10,19 @@ type SwitchProps = {
 export const Switch = ({
   children,
 }: SwitchProps) => {
+  const getMatchingRoute = (path: string) => {
+    const routes = React.Children.toArray(children);
+    const first = routes
+      .filter((x: any) => createEvaluator(x.props.path)(path))
+      [0];
+    return first;
+  };
   const createHistory = (path: string, params: Record<string, any>) => {
+    const route = getMatchingRoute(path);
     return {
       path,
       params,
+      route,
     };
   };
   const push = (path: string, params: Record<string, any>) => {
@@ -59,10 +70,14 @@ export const Switch = ({
     <NavigationContext.Provider
       value={value}
     >
-      {React.Children.map(children, x => (
-        <>
-          {x}
-        </>
+      {value.history.map((history, idx) => (
+        <div id={`page_${idx}`}>
+          <Page
+            isActive={idx === value.history.length - 1}
+            state={history}
+            {...(history.route as any).props}
+          />
+        </div>
       ))}
     </NavigationContext.Provider>
   );
