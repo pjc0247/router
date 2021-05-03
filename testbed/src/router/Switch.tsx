@@ -110,7 +110,10 @@ export const Switch = ({
       value={value}
     >
       {value.history.map((history, idx) => (
-        <div id={`${history.path}_page_${idx}`}>
+        <div
+          key={idx}
+          id={`${history.path}_page_${idx}`}
+        >
           <Page
             isActive={idx === value.history.length - 1}
             state={history}

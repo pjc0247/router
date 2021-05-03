@@ -22,6 +22,7 @@ export const Page = ({
   return (
     <PageContext.Provider
       value={{
+        isActive,
         params,
       }}
     >
