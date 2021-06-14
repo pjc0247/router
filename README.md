@@ -1,8 +1,11 @@
 # router
  
-An alternative react router
+An alternative react router that acts like `react-native-router`.
  
 ![](preview.gif)
+ 
+Usage
+----
  
 ```tsx
 <Switch>
